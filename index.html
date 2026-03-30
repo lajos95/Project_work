@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferrari FanShop</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="webshop_project.css">
+</head>
+
+<body>
+    <div id="takaras"></div>
+    <div id="popup">
+        <img src="img/f1-popup.jpg" alt="webshop popup">
+        <button id="btn1">bezár</button>
+    </div>
+    <div id="takaras2"></div>
+    <!--Felugró kosártartalom ablak-->
+    <div id="kosartartalom" class="display_none">
+        <div class="kosar-fejlec">
+            <h5>Kosarad tartalma</h5>
+            <button id="kosar-bezar" class="btn-close"></button>
+        </div>
+        <div id="kosar-elem-lista">
+
+        </div>
+        <div class="kosar-osszeg">
+            Összesen: <span id="kosar-vegosszeg">0</span>Ft
+        </div>
+        <div class="text-end">
+            <button class="btn btn-dark text-light" id="orderbtn">Tovább a megrendelésre > ></button>
+        </div>
+    </div>
+    <div class="container-fluid p-0">
+        <div class="row" id="home">
+            <!--Felső sor (belép/regisztráció)-->
+            <div class="container-fluid text-end bg-black text-light py-2">
+                <span title="Facebook" class="pointer"><i class="bi bi-facebook fs-3 me-3"></i></span>
+                <span title="Instagram" class="pointer"><i class="bi bi-instagram fs-3 me-3"></i></span>
+                <span title="Twitter" class="pointer"><i class="bi bi-twitter-x fs-3 me-3"></i></span>
+                <span title="TikTok" class="pointer"><i class="bi bi-tiktok fs-3 me-3"></i></span>
+
+                <a href="belep.html" title="Belépés" class="text-white text-decoration-none">
+                    <i class="bi bi-person fs-3"></i>
+                </a>
+
+                <span class="fs-3 text-white opacity-75">/</span>
+
+                <a href="reg.html" title="Regisztráció" class="text-white text-decoration-none me-3">
+                    <i class="bi bi-person-add fs-3"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row align-items-center container-color">
+            <!--Logó, kereső, kosár ikon-->
+            <div class="col-md-3 align-items-center text-center">
+                <a href="index.html"><img src="img/fanshop_logo.png" alt="Webshop logó" id="logo" class="img-fluid"></a>
+            </div>
+            <div class="col-md-7">
+                <form class="d-flex w-100 p-5 align-items-center text-center" role="search" id="form">
+                    <input class="form-control me-2  bg-white" type="search"
+                        placeholder="Kereséshez írj be egy szöveget" aria-label="Search" id="search-input" />
+                    <button class="btn btn-dark" type="submit" id="searchBtn">Keresés</button>
+                </form>
+            </div>
+            <div class="col-md-2 align-items-center text-center text-light">
+                <abrr title="Kosár"><i class="bi bi-cart fs-1 pointer" id="kosar-icon"></i></abrr>
+                <span class="fs-3" id="kosar_szamlalo">0</span>
+            </div>
+        </div>
+        <div class="row navbar_sticky mb-5">
+            <!--Navigációs bár-->
+            <nav class="navbar navbar-expand-lg container-color border-top d-flex justify-content-center">
+                <div class="container-fluid mx-auto">
+                    <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse fw-bold fs-3" id="navbarNavDropdown">
+                        <ul class="navbar-nav mx-auto text-center">
+                            <li class="nav-item m-2">
+                                <a class="nav-link active text-light" aria-current="page" href="#">Főoldal<i
+                                        class="bi bi-chevron-double-right"></i></a>
+                            </li>
+                            <li class="nav-item m-2">
+                                <a class="nav-link active text-light" aria-current="page" href="webshop.html">Webshop <i
+                                        class="bi bi-chevron-double-right"></i></a>
+
+                            </li>
+                            <li class="nav-item m-2">
+                                <a class="nav-link active text-light" aria-current="page" href="gyik.html">GYIK <i
+                                        class="bi bi-chevron-double-right"></i></a>
+                            </li>
+                            <li class="nav-item m-2">
+                                <a class="nav-link active text-light" aria-current="page"
+                                    href="kapcsolat.html">Kapcsolat <i class="bi bi-chevron-double-right"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="row justify-content-center banner_row">
+            <div id="carouselExampleInterval" class="carousel slide border mt-2 mb-5" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="img/banner_1.png" class="img-fluid d-block mx-auto" alt="webshop logó">
+                        </div>
+                    </div>
+
+                    <div class="carousel-item" data-bs-interval="4000">
+                        <img src="img/banner_2.png" class="d-block mx-auto w-100" alt="webshop logó">
+                    </div>
+
+                    <div class="carousel-item" data-bs-interval="4000">
+                        <img src="img/banner_3.png" class="d-block mx-auto w-100" alt="Ferrari 2026 autó Hamilton">
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="row container-md m-auto p-0 mt-5 display_none">
+            <!--Fő rész-->
+            <h1 class="text-center fw-bold">Kiemelt termékeink:</h1>
+            <div class="col d-flex justify-content-between p-4" id="termekek-lista">
+
+            </div>
+        </div>
+
+        <div
+            class="row container-fluid m-auto p-5 mt-5 border rounded-3 shadow-lg d-flex flex-sm-column flex-md-row container-color text-light">
+            <div class="col-sm col-md-4 p-3 d-flex text-align_justify">
+                <i class="bi bi-truck fw-bold fs-1 p-3 align-items-center justify-content-center"></i>
+                <h5 class="fw-bold p-3 mt-3 text-align_justify align-items-center justify-content-center">
+                    Ingyenes szállítás 10.000 Ft felett!
+                </h5>
+            </div>
+            <div class="col-sm col-md-4 p-3 d-flex text-align_justify">
+                <i class="bi bi-shield-check fw-bold fs-1 p-3 align-items-center justify-content-center"></i>
+                <h5 class="fw-bold p-3 text-align_justify align-items-center justify-content-center">
+                    Kizárólag hivatalos, licencelt Scuderia Ferrari termékeket forgalmazunk.</h5>
+            </div>
+            <div class="col-md-4 p-3 d-flex text-align_justify">
+                <i class="bi bi-hand-thumbs-up fw-bold fs-1 p-3 align-items-center justify-content-center"></i>
+                <h5 class="fw-bold p-3 text-align_justify align-items-center justify-content-center">Gyors
+                    ügyfélszolgálat, 8-20 óra között!</h5>
+            </div>
+        </div>
+
+        <div
+            class="row container-fluid m-auto p-5 mt-5 border rounded-3 shadow-lg d-flex flex-sm-column flex-md-row container-color text-light">
+            <div class="col-sm col-md-6">
+                <h1>
+                    Elérhetőségeink:
+                </h1>
+                <p class="kapcsolat"><b>Cím:</b> 6782 Szeged, Rákóczi Ferenc sugárút 56/b.</p>
+                <p class="kapcsolat"><b>Telefonszám:</b> +36/62-558-666</p>
+                <p class="kapcsolat"><b>E-mail:</b> ferrarifanshop@net.hu</p>
+            </div>
+            <div class="col-sm col-md-6">
+                <h3>Ferrari FanShop – A maranellói életérzés hivatalos otthona!</h3>
+                <p>Üdvözöljük a prémium Ferrari termékek és a hivatalos csapatruházat dedikált webáruházában.<br> Nálunk
+                    kizárólag 100% eredeti, licencelt Scuderia Ferrari és PUMA kollekciókat talál, amelyek a legapróbb
+                    részletekig megegyeznek a versenypályán látható darabokkal. Legyen szó a 2026-os szezon
+                    újdonságairól
+                    vagy Lewis Hamilton exkluzív pilóta-termékeiről, nálunk a legmagasabb minőséget képviselő, hiteles
+                    rajongói élmény várja.</p>
+                <svg class="payment-icon pointer border mb-3" 0 viewBox="0 0 165 105" width="38" height="24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <title>Apple Pay</title>
+                    <path
+                        d="M43.5 35.8c1.4-1.8 2.4-4.1 2.1-6.5-2 .1-4.6 1.4-6 3.1-1.3 1.5-2.5 4-2.2 6.3 2.3.2 4.6-1.2 6.1-2.9zM45.6 39.1c-3.4-.2-6.2 1.9-7.8 1.9-1.6 0-4-.2-6.7-1.8-3.4.1-6.6 2-8.4 5.1-3.6 6.2-1 15.4 2.6 20.5 1.7 2.5 3.7 5.3 6.4 5.2 2.6-.1 3.5-1.7 6.6-1.7 3.1 0 4 1.7 6.7 1.6 2.8-.1 4.5-2.5 6.2-5 2-2.9 2.7-5.6 2.8-5.8-.1-.1-5.4-2.1-5.4-8.3-.1-5.2 4.2-7.6 4.4-7.8-2.4-3.5-6.1-3.9-7.4-4z"
+                        fill="#FFF" />
+                    <path
+                        d="M79 32.1c7.3 0 12.3 5 12.3 12.3 0 7.3-5.2 12.4-12.5 12.4h-8v12.8h-5.8V32.1H79zm-8.2 19.8h6.7c5.1 0 8-2.7 8-7.5 0-4.7-2.9-7.4-7.9-7.4h-6.8v14.9zM92.8 61.8c0-4.8 3.7-7.6 10.4-8l7.3-.4v-2.1c0-3-2-4.7-5.6-4.7-2.9 0-5.1 1.5-5.5 3.8h-5.3c.2-4.9 4.7-8.4 10.9-8.4 6.7 0 11 3.5 11 8.9v18.7h-5.4v-4.5h-.1c-1.5 2.9-4.9 4.8-8.6 4.8-5.4 0-9.2-3.2-9.2-8.1zm17.7-2.4v-2.1l-6.5.4c-3.6.2-5.5 1.6-5.5 4 0 2.3 2 3.8 5.1 3.8 4 0 6.9-2.5 6.9-6zM121 79.7v-4.5c.4.1 1.2.1 1.7.1 2.6 0 4-1.1 4.9-3.9l.5-1.7-9.9-27.3h6.1l6.9 22.1h.1l6.9-22.1h5.9l-10.2 28.7c-2.3 6.6-5 8.7-10.7 8.7-.4 0-1.9-.1-2.3-.2z"
+                        fill="#FFF" />
+                </svg>
+                <svg class="payment-icon pointer mb-3" viewBox="0 0 50 30" width="50" height="30"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <title>Mastercard</title>
+                    <rect width="50" height="30" rx="4" fill="#f6f6f6" />
+                    <circle cx="20" cy="15" r="7" fill="#eb001b" />
+                    Mastercard
+                    <circle cx="30" cy="15" r="7" fill="#ff5f00" opacity="0.8" />
+                    <path d="M25 10.3c-1.8 1.2-3 3.3-3 5.7s1.2 4.5 3 5.7c1.8-1.2 3-3.3 3-5.7s-1.2-4.5-3-5.7z"
+                        fill="#ff5f00" />
+                </svg>
+                <svg class="payment-icon pointer mb-3" viewBox="0 0 50 30" width="50" height="30"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <title>Visa</title>
+                    <rect width="50" height="30" rx="4" fill="#f6f6f6" />
+                    <path
+                        d="M19 19.2l1.5-9.2h2.4l-1.5 9.2H19zm11.7-9c-.5-.2-1.3-.4-2.3-.4-2.5 0-4.3 1.3-4.3 3.3 0 1.4 1.3 2.2 2.2 2.7 1 .5 1.3.8 1.3 1.2 0 .6-.8.9-1.5.9-1 0-1.6-.2-2.4-.6l-.3-.2-.4 2.3c.6.3 1.8.5 3 .5 2.6 0 4.3-1.3 4.4-3.4 0-1.1-.7-2-2.2-2.7-.9-.5-1.5-.8-1.5-1.3 0-.4.5-.9 1.5-.9.8 0 1.4.2 1.9.4l.2.1.4-2.3zm8.3 0h-2.3c-.7 0-1.3.4-1.6 1.1L31 19.2h2.6l.5-1.4h3.1l.3 1.4h2.3L39 10.2zm-2.8 5.6l1.3-3.6 0.7 3.6h-2zM14.5 10.2L12 16.5l-.3-1.3c-.4-1.5-1.7-3.1-3.2-3.9l2.1 7.9h2.6L17.1 10.2h-2.6z"
+                        fill="#1A1876" />
+                    <path d="M9.4 10.2H6c0.4 1.2 1.7 1.9 2.8 2.6L9.4 10.2z" fill="#F7B600" />
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div id="kartya_kiemelt" class="display_none text-center opacity_0">
+
+    </div>
+
+    <!--Footer-->
+
+    <footer class="container-fluid border-top mt-5 bg-black text-light">
+        <span id="clock"></span>
+    </footer>
+
+    <div class="container-fluid text-light" id="cookies">
+        <h3>Weboldalunk sütiket (cookie) használ</h3>
+
+        <p>A weboldal a felhasználói élmény növelése, a működés optimalizálása és statisztikai célokból sütiket
+            használ. A sütik személyes adatokat is kezelhetnek, amelyeket hozzájárulásával tárolunk. Az „Elfogadom”
+            gombra kattintva Ön hozzájárul az összes süti használatához, a „Beállítások” menüpontban testreszabhatja
+            a hozzájárulást.</p>
+        <button class="btn btn-light rounded-3" id="btnCookies">Elfogadom a felhasználási feltételeket</button>
+    </div>
+
+    <a href="#home" class="btn btn-secondary opacity-50 position-fixed bottom-0 end-0 m-3"><i
+            class="bi bi-chevron-double-up"></i></a>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="webshop_project.js"></script>
+</body>
+
+</html>
