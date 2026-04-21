@@ -1,4 +1,3 @@
-//Dátum beállítása az oldal álján a footerbe
 let clockElement = document.getElementById("clock");
 function clock() {
     let d = new Date();
@@ -49,8 +48,6 @@ function clock() {
 clock();
 setInterval(clock, 1000);
 
-//Felugró ablak
-
 $(document).ready(function () {
     $("#takaras").delay(3000).fadeIn(1000);
     $("#popup").delay(3000).fadeIn(1000);
@@ -61,19 +58,14 @@ $(document).ready(function () {
     })
 })
 
-//A sötét háttérre kattintásnál bezáródik a kiemelt kártya is
-
 document.getElementById("takaras2").addEventListener("click", () => {
     let kiemelt = document.getElementById("kartya_kiemelt");
     let takaras2 = document.getElementById("takaras2");
 
-    // Elrejtjük az ablakot és a hátteret
     kiemelt.classList.add("display_none");
     kiemelt.classList.replace("opacity_1", "opacity_0");
     takaras2.style.display = "none";
 });
-
-//Cookies
 
 $(document).ready(function () {
     $("#cookies").delay(6000).fadeIn(2000);
@@ -82,7 +74,6 @@ $(document).ready(function () {
     })
 });
 
-//Tömb felvétele, elemek megadása
 const termekAdatok = [
     { id: 1, nev: "5000 Ft értékű ajándékutalvány", ar: 5000, kep: "img/ajandek1.png", leiras: "Ajándékozd oda a sebesség élményét! Nem tudod, melyik pólót vagy modellautót választaná a szeretted? Válaszd a biztos utat a Ferrari FanShop ajándékutalvánnyal. Ezzel az 5000 forintos kártyával a megajándékozott saját maga válogathatja össze a kedvenc Scuderia Ferrari kiegészítőit, legyen szó Hamilton vagy Leclerc relikviákról. A vörös szenvedély most egyetlen utalványba sűrítve várja, hogy valóra váltsa egy rajongó álmát.", filter: "filterItem gift" },
     { id: 2, nev: "10000 Ft értékű ajándékutalvány", ar: 10000, kep: "img/ajandek2.png", leiras: "Ajándékozd oda a sebesség élményét! Nem tudod, melyik pólót vagy modellautót választaná a szeretted? Válaszd a biztos utat a Ferrari FanShop ajándékutalvánnyal. Ezzel a 10000 forintos kártyával a megajándékozott saját maga válogathatja össze a kedvenc Scuderia Ferrari kiegészítőit, legyen szó Hamilton vagy Leclerc relikviákról. A vörös szenvedély most egyetlen utalványba sűrítve várja, hogy valóra váltsa egy rajongó álmát.", filter: "filterItem gift" },
@@ -99,15 +90,12 @@ const termekAdatok = [
     { id: 13, nev: "Ferrari SF-25 modellautó - Lewis Hamilton aláírásával", ar: 14000, kep: "img/ferrari_sf-25_hamilton_signature-1.jpg", kep2: "img/ferrari_sf-25_hamilton_signature-2.jpg", leiras: "A sebesség művészete kicsiben! Ez az 1/43-as méretarányú Lewis Hamilton modell a Bburago Signature széria csúcsdarabja, amely garantálja a tökéletesen élethű, aprólékos kidolgozást. A készlet tartalmazza a versenyző figuráját is, az autó pedig egy elegáns talapzaton, kristálytiszta akril vitrinben pihen. Az exkluzív díszdoboz a pilóta aláírásával teszi teljessé ezt a páratlan relikviát minden gyűjtő számára.", filter: "filterItem car hamilton" },
 ];
 
-//A tömbbön belül bizonyos termékek értékeit csökkentjük 80%-ra
 termekAdatok.forEach((t, index) => {
     if (index > 2) {
         t.eredetiAr = t.ar;
         t.ar = Math.round(t.ar * 0.8);
     }
 });
-
-//Változók meghatározása
 
 const searchBtn = document.getElementById("searchBtn");
 const keresesInput = document.getElementById("search-input");
@@ -123,8 +111,6 @@ const orderBtn = document.getElementById("orderbtn");
 let kosarTartalom = [];
 let kosarDarab = 0;
 
-//Terméklista generálása
-
 function termekListaGen(lista) {
     termekekListaDiv.textContent = "";
 
@@ -134,37 +120,32 @@ function termekListaGen(lista) {
     });
 };
 
-//Az oldal újratöltése után ne vesszenek el az adatok, lehessen folytatni a vásárlást
-
 $(document).ready(function () {
-    let mentettKosar = JSON.parse(localStorage.getItem('local_kosar')); //egy változóba elmentjük a helyi böngészőben lévő adatokat
+    let mentettKosar = JSON.parse(localStorage.getItem('local_kosar'));
 
-    if (mentettKosar && mentettKosar.length > 0) { //Amennyiben a helyi memóriában maradt adat, frissítjük a képernyőn lévő tartalmat és a változókat/adatokat
-        kosarTartalom = mentettKosar; //A kosártartalom egyenlő lesz a helyi memóriában lévő tartalommal
+    if (mentettKosar && mentettKosar.length > 0) {
+        kosarTartalom = mentettKosar;
         kosarDarab = kosarTartalom.length;
         
-        const szamlalo = document.getElementById("kosar_szamlalo"); //Frissíteni kell a számlálót a kosár ikon mellett
+        const szamlalo = document.getElementById("kosar_szamlalo");
         if (szamlalo) {
             szamlalo.textContent = kosarDarab;
         };
     }
 });
 
-//Kosárba helyezés
-
 function kosarbaHelyez(termekId) {
     const termek = termekAdatok.find(t => t.id === termekId);
 
     if (termek) {
         kosarTartalom.push(termek);
-        localStorage.setItem('local_kosar', JSON.stringify(kosarTartalom)); //A termék bekerül a kosárba, vagyis a böngésző memóriájáb is - setItem - , frissítjük az eddigieket
+        localStorage.setItem('local_kosar', JSON.stringify(kosarTartalom));
         kosarDarab++;
         document.getElementById("kosar_szamlalo").textContent = kosarDarab;
         alert("A termék a kosaradba került!")
     }
 };
 
-//Kosár tartalmának megjelenítése
 function kosarmegjelenites() {
     const listaDiv = document.getElementById("kosar-elem-lista");
     const vegosszegSpan = document.getElementById("kosar-vegosszeg");
@@ -200,27 +181,22 @@ function kosarmegjelenites() {
 };
 
 function kosarelemtorles(index) {
-    kosarTartalom.splice(index, 1); //A megfelelő indexű elem törlése
-    kosarDarab--; //A kosár meletti számlaló értékét csökkentjük
-    document.getElementById("kosar_szamlalo").textContent = kosarDarab; //A kosár ikon melletti számláló csökkentése
-    kosarmegjelenites(); //A változás után a kosár tartalmát újratöltjük, frissítjük a jelenlegi állapotra
-    localStorage.setItem('local_kosar', JSON.stringify(kosarTartalom)); //A törölt tartalom törlése a böngésző memóriájából
+    kosarTartalom.splice(index, 1);
+    kosarDarab--;
+    document.getElementById("kosar_szamlalo").textContent = kosarDarab;
+    kosarmegjelenites();
+    localStorage.setItem('local_kosar', JSON.stringify(kosarTartalom));
 };
 
-//Kosár ikonra kattintva a kosár tartalma előkerül
 $(document).ready(function () {
-    //Kosár megjelenik
     $("#kosar-icon").click(function () {
         kosarmegjelenites();
     });
-    //Kosár bezárás
     $("#kosar-bezar, #takaras2").click(function () {
         $("#kosartartalom").addClass("display_none");
         $("#takaras2").hide();
     });
 });
-
-//Megrendelés gomb: kosár tartalma kiürül. Alert üzenet: Köszönjük megrendelését!
 
 orderBtn.addEventListener("click", () => {
     const listaDiv = document.getElementById("kosar-elem-lista");
@@ -240,7 +216,6 @@ orderBtn.addEventListener("click", () => {
     alert("Köszönjük megrendelését!");
 });
 
-//Termékkártya létrehozása
 function createTermekKartya(termek) {
     const col = document.createElement("div");
     col.className = "col-sm-6 col-md-6 col-lg-4 col-xxl-3";
@@ -249,7 +224,6 @@ function createTermekKartya(termek) {
     const kartya2 = document.createElement("div");
     kartya2.className = 'card-body position-relative';
 
-    //Bizonyos termékeknél a 80%-os ár megjelenítése
     let arMegjelenites = "";
     if (termek.eredetiAr) {
         arMegjelenites = `
@@ -271,7 +245,6 @@ function createTermekKartya(termek) {
     col.appendChild(kartya);
     kartya.appendChild(kartya2);
 
-    //Bezáró ikon
     const ikon = kartya2.querySelector(".card-btn-info");
 
     ikon.addEventListener("click", () => {
@@ -292,13 +265,11 @@ function createTermekKartya(termek) {
     return col;
 };
 
-//Szűrő funkció a gombokhoz
 function filterSelection(c) {
     if (c === 'all') {
         termekListaGen(termekAdatok);
     }
     else {
-        //A szurt állandóba belerakjuk a termekAdaton tömbben lévő elemek filter tulajdonságát. Így csak azokat az elemeket jelenítjük meg amelyek ezt a filtert tartalmazzák.
         const szurt = termekAdatok.filter(t => t.filter.includes(c));
         termekListaGen(szurt);
     }
@@ -306,30 +277,24 @@ function filterSelection(c) {
 
 $(document).ready(function () {
     const btnContainer = document.getElementById("myBtnBox");
-    const gombok = btnContainer.getElementsByClassName("btn"); //Egy listát ad vissza, amelyben benne vannak a gombok a myBtnBox div elemen belül
-    //A for ciklussal a gombok változóba beleraktuk az összes gombok, amely egyfajta tömb. A for ciklussal végigmegyünk a listán, mert a listán belül mindegyik gomb kapott egy indexet.
+    const gombok = btnContainer.getElementsByClassName("btn");
     for (let i = 0; i < gombok.length; i++) {
         gombok[i].addEventListener("click", function () {
-            //Az aktuális, active osztállyal rendelkező gomb megkeresése
             let current = btnContainer.getElementsByClassName("active");
-            //A gomb aktív, akkor az active osztály lekerül róla
             if (current.length > 0) {
                 current[0].className = current[0].className.replace("active", "");
             };
-            //Az aktuálisan kattintott gombhoz hozzáadjuk az active osztályt
             this.className += " active";
         });
     };
 });
 
-//Kiemelt kártya tartalom
 function createTermekKartya2(termek) {
     const kartya = document.createElement("div");
     const kartya2 = document.createElement("div");
     kartya.className = 'card_kiemelt position-fixed rounded-5 p-5 overflow-auto';
     kartya2.className = 'card-body position-relative';
 
-    // Kedvezményes ár megjelenítése a kiemelt kártyán is
     let arMegjelenites = "";
     if (termek.eredetiAr) {
         arMegjelenites = `
@@ -340,7 +305,6 @@ function createTermekKartya2(termek) {
         arMegjelenites = `<p class="fw-bold fs-4">Ár: ${termek.ar.toLocaleString()} Ft</p>`;
     }
 
-    // 2. A termékekhez tartozó képek és a galéria elemek előkészítése
     const masodikKepHTML = termek.kep2 ? `
         <div class="mySlides" style="display:none;">
             <div class="numbertext">2 / 2</div>
@@ -357,7 +321,6 @@ function createTermekKartya2(termek) {
             </div>
         </div>` : "";
 
-    // 3. A kartya2 összeállítása
     kartya2.innerHTML = `
         <i class="bi bi-x-circle fs-3 pt-1 ps-5 position-absolute top-0 start-100 translate-middle infoicon pointer"></i>
         
@@ -386,8 +349,6 @@ function createTermekKartya2(termek) {
 
     kartya.appendChild(kartya2);
 
-    // 4. A galéria a kártyán belül
-
     let slideIndex = 1;
     const slides = kartya2.getElementsByClassName("mySlides");
     const dots = kartya2.getElementsByClassName("demo");
@@ -412,8 +373,6 @@ function createTermekKartya2(termek) {
         }
     }
 
-    // 5. Eseménykezelők hozzárendelése
-
     if (termek.kep2) {
         kartya2.querySelector(".prev").addEventListener("click", () => showSlides(slideIndex -= 1));
         kartya2.querySelector(".next").addEventListener("click", () => showSlides(slideIndex += 1));
@@ -423,7 +382,6 @@ function createTermekKartya2(termek) {
         thumbs[1].addEventListener("click", () => showSlides(slideIndex = 2));
     }
 
-    // Bezárás gomb
     const ikon = kartya2.querySelector(".infoicon");
     ikon.addEventListener("click", () => {
         kartyaKiemeltDiv.classList.add("display_none");
@@ -431,7 +389,6 @@ function createTermekKartya2(termek) {
         document.getElementById("takaras2").style.display = "none";
     });
 
-    // Kosár gomb
     const kosarGomb = kartya2.querySelector(".card-btn");
     kosarGomb.addEventListener("click", () => {
         kosarbaHelyez(termek.id);
@@ -440,10 +397,7 @@ function createTermekKartya2(termek) {
     return kartya;
 };
 
-//Oldal ellenőrzése
-
 if (jelenlegiOldal.includes("results.html")) {
-    // Amenniyben a találati oldalon vagyunk, az URL-ből indulunk ki
     const urlParams = new URLSearchParams(window.location.search);
     const keresoSzo = urlParams.get('query');
 
@@ -457,11 +411,8 @@ if (jelenlegiOldal.includes("results.html")) {
         termekListaGen(termekAdatok);
     }
 } else {
-    // Ha az index.html-en (vagy máshol) vagyunk, minden termék látható
     termekListaGen(termekAdatok);
 };
-
-//Kereső gombra kattintással/enter lenyomásra keresés + renderlista létrehozása
 
 searchBtn.addEventListener("click", () => {
     const keresoSzo = keresesInput.value.toLowerCase().trim();
@@ -481,35 +432,24 @@ keresesInput.addEventListener("keypress", (event) => {
     }
 });
 
-//GYIK lap lenyitós ablak jquery-vel
-
 $(document).ready(function () {
-    //a teljes eseményre figyeli a kattintást. bármelyikre kattintunk (.question), akkor is működik.
     $(".question").on("click", function () {
-        //1. megkeressük a kattintott elemhez tartozó választ
-        const $nextAnswer = $(this).next(".answer"); //a html-ben a következő .answer jelenik meg(legközelebbi)
-
-        //2. ha a kattintott válasz nyitva, akkor bezárjuk
+        const $nextAnswer = $(this).next(".answer");
 
         if ($nextAnswer.is(":visible")) {
             $nextAnswer.slideUp();
-            $(this).removeClass("active").find("span").text("+"); //a kattinott elemen belül megkeresi a <span>-t és kicseréli a "-"-t "+"-ra
+            $(this).removeClass("active").find("span").text("+");
         }
 
-        //3. ha a kattintott válasz zárva van
-        
         else {
-            $(".answer").slideUp(); //bezárja az összes nyitva lévő .answert
+            $(".answer").slideUp();
             $(".question").removeClass("active").find("span").text("+")
-            //kinyitjuk a kattintottat és ellátjuk a .active-val és a "+"-t "-"-r cseréljük
             $nextAnswer.slideDown();
             $(this).addClass("active").find("span").text("-");
         }
     })
 
 })
-
-//Jelszó (bizonyos hossznál feloldja a jelszó megerősítése mezőt)
 
 $(document).ready(function () {
     let jelszo1 = $("#jelszo");
